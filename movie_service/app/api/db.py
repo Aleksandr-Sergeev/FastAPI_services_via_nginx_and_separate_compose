@@ -3,9 +3,9 @@ from sqlalchemy import (Column, Integer, MetaData, String, Table,
 import os
 from databases import Database
 
-# DATABASE_URL = 'postgresql://movies:movies@localhost:5432/movies_db'
-DATABASE_URI = os.getenv('DATABASE_URI')
-engine = create_engine(DATABASE_URI)
+DATABASE_URL = 'postgresql://movies:movies@localhost:5433/movie_db_dev'
+DATABASE_URL = os.getenv('DATABASE_URL') or DATABASE_URL
+engine = create_engine(DATABASE_URL)
 metadata = MetaData()
 
 movies = Table(
@@ -18,4 +18,4 @@ movies = Table(
     Column('casts', ARRAY(Integer))
 )
 
-database = Database(DATABASE_URI)
+database = Database(DATABASE_URL)

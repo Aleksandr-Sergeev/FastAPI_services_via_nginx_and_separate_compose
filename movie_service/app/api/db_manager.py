@@ -1,5 +1,5 @@
-from .models import MovieIn
-from .db import movies, database
+from api.models import MovieIn
+from api.db import movies, database
 
 
 async def add_movie(payload: MovieIn):

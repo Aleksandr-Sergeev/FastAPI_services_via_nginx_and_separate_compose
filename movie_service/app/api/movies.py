@@ -24,15 +24,19 @@ async def get_movie(movie: Union[int, str]):
 
 @movies.post('/', response_model=MovieOut, status_code=201)
 async def create_movie(payload: MovieIn):
+    casts_id = []
     for cast in payload.casts:
-        if not is_cast_present(cast):
+        cast_id = is_cast_present(cast)
+        if cast_id:
+            casts_id.append(cast_id)
+        else:
             if isinstance(cast, str):
-                cast_response = create_cast(cast)
-                print(cast_response)
+                casts_id.append(create_cast(cast))
             else:
                 raise HTTPException(status_code=404,
                                     detail=f"Cast with id:{cast} not found")
     # TODO: если актер не в БД casts, надо его туда добавить
+    payload.casts = casts_id
     movie_id = await add_movie(payload)
     response = {
         'id': movie_id,

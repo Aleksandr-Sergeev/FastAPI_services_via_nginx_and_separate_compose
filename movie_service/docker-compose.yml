@@ -6,13 +6,13 @@ services:
     command: uvicorn app.main:app --reload --host 0.0.0.0 --port 8001
     volumes:
       - ./:/app/
-    networks:
-      - movies_network
-      - movies_db_network
+#    networks:
+#      - movies_network
+#      - movies_db_network
     ports:
       - "8001:8001"
     environment:
-      - DATABASE_URI=postgresql://movies:movies@movie_db/movie_db_dev
+      - DATABASE_URL=postgresql://movies:movies@movie_db/movie_db_dev
 #      - 'postgresql://movies:movies@localhost:5432/movies_db'
       - CAST_SERVICE_HOST_URL=http://cast_service:8000/api/v1/casts/
     depends_on:
@@ -22,8 +22,8 @@ services:
     image: postgres
     volumes:
       - postgres_data_movie:/var/lib/postgresql/data/
-    networks:
-      - movies_db_network
+#    networks:
+#      - movies_db_network
     ports:
       - "5433:5432"
     environment:
@@ -34,7 +34,7 @@ services:
 volumes:
   postgres_data_movie:
 
-networks:
-  movies_network:
-    external: true
-  movies_db_network:
+#networks:
+#  movies_network:
+#    external: true
+#  movies_db_network:

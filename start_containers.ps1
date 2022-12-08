@@ -4,3 +4,5 @@ Set-Location C:\Users\aleksandr.sergeev\Desktop\learning\fastAPI_services_networ
 docker compose up -d
 Set-Location C:\Users\aleksandr.sergeev\Desktop\learning\fastAPI_services_network\nginx
 docker compose up -d
+Set-Location C:\Users\aleksandr.sergeev\Desktop\learning\fastAPI_services_network\rabbitmq
+docker compose up -d
